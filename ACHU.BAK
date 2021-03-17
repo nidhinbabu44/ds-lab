@@ -1,0 +1,79 @@
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+#include<stdlib.h>
+int scan(int);
+int number(char);
+int findingG();
+int findingL();
+int erase(char);
+char opers[4]={'i','+','*','$'},input[50];
+  char table[4][4]={'=','>','>','>','<','>','<','>','<','>','>','>',
+  '<','<','<','=',};
+  int scan(int position)
+  {
+   int i;
+   for(i=strlen(input);i>=position;i--)
+   input[i]=input[i-1];
+   return i;
+   }
+   int number(char operator)
+{
+int i;
+for(i=0;i<sizeof(opers);i++)
+if(opers[i]==operator)
+return i;
+return -1;
+}
+int findingG()
+{
+int i;
+for(i=0;i<strlen(input);i++)
+if(input[i]=='>')
+ return i;
+ return -1;
+ }
+ int findingL(int position)
+ {
+   int i;
+   for(i=position;i>=0;i--)
+    if(input[i]=='<')
+     return i;
+     return -1;
+     }
+     int erase(char ch)
+     {
+      int i,j;
+      for(i=0;i<strlen(input);i++)
+      if(input[i]==ch)
+      for(j=i;j<strlen(input);j++)
+      input[j]=input[j+1];
+      return -1;
+      }
+void main()
+{
+int i,G,L;
+clrscr();
+printf("\n\n\t\t***OPERATOR PRECEDENCE PARSING***\n\n");
+printf("enter the input:");
+scanf("%s",input);
+for(i=1;i<strlen(input);i+=2)
+{
+scan(i);
+input[i]=table[number(input[i])][number(input[i+1])];
+}
+printf("\n\t THE PARSED OUTPUT IS \n");
+while(strcmp(input,"$$"))
+{
+G=findingG();
+L=findingL(G);input[L]='x';
+input[L+1]=table[number(input[L-1])][number(input[G+1])];
+input[G]='x';
+erase('x');
+erase('=');
+printf("\nNEXT STAGE:\n");
+printf("%S",input);
+}
+getch();
+}
+

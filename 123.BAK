@@ -1,0 +1,28 @@
+#include<iostream.h>
+class student
+{
+private:
+int a;
+public:
+void display()
+{
+ cout<<"nalla kuttti";
+}
+void show(int a)
+{
+cout<<a*2;
+
+}
+
+};
+#include<conio.h>
+#include<iostream.h>
+void main()
+{
+ student s;
+ s.display();
+ s.show(2);
+ getch();
+ clrscr();
+
+}
